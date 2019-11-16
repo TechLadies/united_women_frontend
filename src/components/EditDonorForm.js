@@ -41,7 +41,7 @@ const EditDonorForm = props => {
             <Row>
               <Form.Group as={Col} controlId="donorSalutation" column sm="6">
                 <Form.Label >Salutation</Form.Label>
-                <Form.Control name="salutation" defaultValue={data.salutation} />
+                <Form.Control name="salutation" defaultValue={data.salutation} onChange={handleInputChange}/>
               </Form.Group>
               <Form.Group as={Col} controlId="donorName" column sm="6">
                 <Form.Label>Name</Form.Label>
