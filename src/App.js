@@ -9,6 +9,7 @@ import Login from './components/Login';
 import DonorRecords from './components/DonorRecords';
 import DonationRecords from './components/DonationRecords';
 import UploadRecords from './components/UploadRecords';
+import DonorOverview from './components/DonorOverview';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route exact path='/' component={DonorRecords}/>
         <Route path="/donation-records" component={DonationRecords}/>
         <Route path="/upload-records" component={UploadRecords}/>
+        <Route path="/donor-record" component={DonorOverview}/>
       </Switch>
     </Router>
   );
