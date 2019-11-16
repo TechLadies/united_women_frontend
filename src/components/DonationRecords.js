@@ -1,5 +1,6 @@
 import React from 'react'
 import NavBarWrapper from '../helpers/NavBarWrapper'
+import { withAuthorisedPageHOC } from '../wrappers/withTokenHOC'
 
 const DonationRecords = () => (
   <main>
@@ -7,4 +8,4 @@ const DonationRecords = () => (
   </main>
 )
 
-export default NavBarWrapper(DonationRecords)
+export default withAuthorisedPageHOC(NavBarWrapper(DonationRecords))

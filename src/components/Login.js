@@ -2,30 +2,29 @@ import React from 'react';
 import './Login.css';
 import useForm from '../useForm';
 import validate from '../validateLogin';
-import { Redirect  } from "react-router-dom";
+import auth from '../helpers/auth';
+import { withLoginPageHOC } from '../wrappers/withTokenHOC';
 
-const LoginPage = () => {
 
-    const { inputs, errors, touched, handleChange, handleBlur, handleSubmit} = useForm(submit, validate);
+function LoginPage({ setToken }) {
 
-    function submit() {
-      fetch('http://localhost:3001/login', {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            username: inputs.username,
-            password: inputs.password,
-        }),
-      }).then((responseJson) => {
-        window.location.href = '/';
-      })
-      .catch((error) => {
-        console.error(error);
+  const { inputs, errors, touched, handleChange, handleBlur, handleSubmit} = useForm(submit, validate);
+
+  async function submit() {
+    try {
+      const token = await auth({
+        username: inputs.username,
+        password: inputs.password,
       });
+      
+      if (token) {
+        setToken(token);
+      }
+
+    } catch (err) {
+      console.error(err);
     }
+  }
 
   return (
     <div className='container'>
@@ -67,4 +66,4 @@ const LoginPage = () => {
   );
 }
 
-export default LoginPage;
+export default withLoginPageHOC(LoginPage);
