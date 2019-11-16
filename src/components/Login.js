@@ -2,14 +2,29 @@ import React from 'react';
 import './Login.css';
 import useForm from '../useForm';
 import validate from '../validateLogin';
+import { Redirect  } from "react-router-dom";
 
 const LoginPage = () => {
 
     const { inputs, errors, touched, handleChange, handleBlur, handleSubmit} = useForm(submit, validate);
 
     function submit() {
-      console.log('Submitted');
-      console.log(inputs);
+      fetch('http://localhost:3001/login', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            username: inputs.username,
+            password: inputs.password,
+        }),
+      }).then((responseJson) => {
+        window.location.href = '/';
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     }
 
   return (
