@@ -1,3 +1,7 @@
+#root {
+  display: flex;
+}
+
 .App {
   text-align: center;
 }
@@ -30,4 +34,19 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+main {
+  padding: 30px;
+  flex-grow: 1;
+}
+
+.app-container {
+  display: flex;
+}
+
+h1 {
+  color: #0098DC;
+  font-size: 24px;
+  font-weight: bold;
 }

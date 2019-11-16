@@ -1,9 +1,10 @@
 import React from 'react'
+import NavBarWrapper from '../helpers/NavBarWrapper'
 
 const DonationRecords = () => (
-  <div>
+  <main>
     <h1>Donation Records</h1>
-  </div>
+  </main>
 )
 
-export default DonationRecords
+export default NavBarWrapper(DonationRecords)

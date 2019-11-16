@@ -1,12 +1,13 @@
 .sidebar {
-    min-width: 300px;
-    max-width: 300px;
+    min-width: 280px;
+    max-width: 280px;
     height: 100vh;
     padding: 35px;
 }
 
 a {
-    color: #009cd7;
+    color: #0098DC;
+    font-weight: bold;
 }
 
 .nav-link {
@@ -14,5 +15,6 @@ a {
 }
 
 .sidebar .btn-logout {
-    align-self: flex-end;
+    position: absolute;
+    bottom: 30px;
 }
