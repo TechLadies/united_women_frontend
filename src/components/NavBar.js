@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './NavBar.css'
 
 function NavBar({ unsetToken }) {
@@ -17,22 +17,19 @@ function NavBar({ unsetToken }) {
                 <p>United Women</p>
             </div>
             <nav className='sidebar-nav'>
-                <ul>
+                <ul className='nav'>
                     <li className='nav-item'>
-                        <NavLink to='/'
-                                 className='nav-link'
-                                 isActive={checkActive}
-                                 activeClassName='active'>Donor Records</NavLink>
+                        <Link to='/' className='nav-link'>Donor Records</Link>
                     </li>
                     <li className='nav-item'>
-                        <NavLink to='/donation-records' className='nav-link' activeClassName='active'>Donation Records</NavLink>
+                        <Link to='/donation-records' className='nav-link'>Donation Records</Link>
                     </li>
                     <li className='nav-item'>
-                        <NavLink to='/upload-records' className='nav-link' activeClassName='active'>Upload Records</NavLink>
+                        <Link to='/upload-records' className='nav-link'>Upload Records</Link>
                     </li>
                 </ul>
             </nav>
-            <button type="button" className="btn btn-outline-primary btn-block btn-logout" onClick={ unsetToken }>Logout</button>
+            <button type="button" className="btn btn-outline-secondary btn-logout">Logout</button>
         </div>
 
     );

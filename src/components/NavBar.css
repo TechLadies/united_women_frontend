@@ -36,7 +36,7 @@ a:hover {
     font-weight: bold;
 }
 
-.btn-logout {
-    margin-top: auto;
-    margin-bottom: 0;
+.sidebar .btn-logout {
+    position: absolute;
+    bottom: 30px;
 }
