@@ -6,7 +6,6 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import EditDonorForm from './EditDonorForm'
 import NavBarWrapper from '../helpers/NavBarWrapper'
-import DonationHistory from './DonationHistory'
 
 
 const DonorOverview = () => {
@@ -61,7 +60,7 @@ const DonorOverview = () => {
         <DonorDetails currentDonor={donor}/>
         </div>
       )}
-      <DonationHistory/>
+
     </>
   )
 }
