@@ -6,7 +6,9 @@ function NavBarWrapper(Component) {
         return (
             <React.Fragment>
                 <NavBar/>
+                <main>
                 <Component/>
+                </main>
             </React.Fragment>
         )
     }
