@@ -14,7 +14,6 @@ const EditDonorForm = props => {
     const handleInputChange = event => {
       const { name, value } = event.target
       setData({ ...data, [name]: value})
-      console.log(data)
       props.getUpdatedDonor(data)
     }
 
@@ -26,12 +25,7 @@ const EditDonorForm = props => {
             <Row>
               <Form.Group as={Col} controlId="donorNRIC" column sm="6">
                 <Form.Label >NRIC</Form.Label>
-                { props.editMode ?
                 <Form.Control name="nric" defaultValue={data.nric} onChange={handleInputChange}/>
-                :
-                <Form.Control plaintext readOnly name="nric" defaultValue={data.nric} onChange={handleInputChange}/>
-                }
-
               </Form.Group>
               <Form.Group as={Col} controlId="donorType" column sm="6">
                 <Form.Label >Type</Form.Label>

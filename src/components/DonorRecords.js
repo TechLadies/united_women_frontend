@@ -5,11 +5,12 @@ import { Link } from 'react-router-dom'
 
 const DonorRecords = () => {
   return(
-      <main>
+      <>
         <h1>Donor Records</h1>
         {/* for testing */}
         <Link to='/donor-record' className='nav-link'>Amy Lim</Link>
-    </main>
+        <Link to='/add-donor' className='nav-link'>Add donor</Link>
+      </>
   )
 }
 

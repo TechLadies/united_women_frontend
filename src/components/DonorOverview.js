@@ -8,6 +8,9 @@ import EditDonorForm from './EditDonorForm'
 import NavBarWrapper from '../helpers/NavBarWrapper'
 import { withAuthorisedPageHOC } from '../wrappers/withTokenHOC'
 
+import DonationHistory from './DonationHistory'
+
+
 const DonorOverview = () => {
   const currentDonor = {
     name: 'Amy Lim',
@@ -35,7 +38,7 @@ const DonorOverview = () => {
   )
 
   const CancelButton = () => (
-    <button onClick={()=>setEditing(false)} className="btn btn-outline-primary">Cancel</button>
+    <button onClick={()=>setEditing(false)} className="btn btn-link">Cancel</button>
   )
 
   const EditButton = () => (
@@ -44,29 +47,31 @@ const DonorOverview = () => {
 
   /*render*/
   return(
-      <main>
+      <>
       <h1>Donor Records</h1>
       <div className="breadcrumbs">
-        <p>Donor List  >  <strong>{donor.name}</strong></p>
-        { editing ? <div className="btn-toolbar mr-2"><SaveButton/><CancelButton/></div> : <EditButton/> }
+        <p><Link to="/">Donor List</Link>  >  <strong>{donor.name}</strong></p>
+        { editing ? <div className="btn-toolbar"><CancelButton/><SaveButton/></div> : <EditButton/> }
       </div>
 
       { editing ? (
         <div>
-        <EditDonorForm editMode={editing} currentDonor={donor} getUpdatedDonor={getUpdatedDonor}/>
+        <EditDonorForm currentDonor={donor} getUpdatedDonor={getUpdatedDonor}/>
         </div>
       ) : (
         <div>
         <DonorDetails currentDonor={donor}/>
         </div>
       )}
-    </main>
+      <DonationHistory/>
+    </>
   )
 }
 
 
 
 const DonorDetails = props => {
+
   return (
     <Form>
       <Row className="donor-summary__container">
@@ -98,7 +103,7 @@ const DonorDetails = props => {
           <Row>
             <Form.Group as={Col} controlId="donorEmail" column sm="6">
               <Form.Label>Email</Form.Label>
-              <Form.Control plaintext readOnly defaultValue={props.currentDonor.email} />
+              <Form.Control plaintext readOnly type="email" defaultValue={props.currentDonor.email} />
             </Form.Group>
             <Form.Group as={Col} controlId="donorPhone" column sm="6">
               <Form.Label>Phone</Form.Label>
