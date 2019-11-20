@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table'
 
 const DonationHistory = () => {
-    let loading = false
     let totalItems = 0
     let totalPages = 0
     const [currentPage, setCurrentPage] = useState(1)
     const [data, setData] = useState([])
     const [json, setJson] = useState({})
+    const [loading, setLoading] = useState(false)
 
     const fetchJson = async (url) => {
       const json = await fetch(url).then(response => response.json())
@@ -15,21 +15,21 @@ const DonationHistory = () => {
     }
 
     const loadNewPage = async (pageNumber) => {
-      loading = true
+      setLoading(true)
       const response = await fetchJson(`https://reqres.in/api/users?page=${pageNumber}`)
       setJson(response)
       setData(response.data)
-      loading = false
+      setLoading(false)
     }
 
     useEffect(() => {
       const fetchPosts = async () => {
-        loading = true
+        setLoading(true)
         const response = await fetchJson("https://reqres.in/api/users?page=1")
         /* data: Array, page: 1, per_page: 6, total: 12, total_pages: 2*/
         setJson(response)
         setData(response.data)
-        loading = false
+        setLoading(false)
       }
       fetchPosts()
     }, [])
