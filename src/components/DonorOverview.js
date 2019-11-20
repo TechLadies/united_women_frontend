@@ -7,6 +7,8 @@ import Col from 'react-bootstrap/Col'
 import EditDonorForm from './EditDonorForm'
 import NavBarWrapper from '../helpers/NavBarWrapper'
 import { withAuthorisedPageHOC } from '../wrappers/withTokenHOC'
+import DonationHistory from './DonationHistory'
+
 
 const DonorOverview = () => {
   const currentDonor = {
@@ -60,7 +62,7 @@ const DonorOverview = () => {
         <DonorDetails currentDonor={donor}/>
         </div>
       )}
-
+      <DonationHistory/>
     </>
   )
 }
