@@ -46,7 +46,7 @@ const DonationHistory = () => {
     }
 
     return (
-      <div className="container mt-5">
+      <div className="mt-5">
         { loading ? <p>Loading</p> :
         <>
         <DonationHistoryTable users={data} loading={loading} totalItems={totalItems} currentPage={currentPage}/>
@@ -94,6 +94,12 @@ const Pagination = ({ perPage, totalItems, paginate, currentPage }) => {
     return (
         <nav>
             <ul className="pagination">
+                <li className={currentPage === 1 ? "page-item disabled" : "page-item"}>
+                    <a class="page-link" href="#" aria-label="Previous" onClick={() => paginate(--currentPage)}>
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
                 {pageNumbers.map(number => (
                     <li key={number} className={currentPage === number ? "page-item active" : "page-item"}>
                         <a onClick={() => paginate(number)}
@@ -102,7 +108,12 @@ const Pagination = ({ perPage, totalItems, paginate, currentPage }) => {
                         </a>
                     </li>
                 ))}
-
+                <li className={currentPage === pageNumbers.length ? "page-item disabled" : "page-item"}>
+                    <a class="page-link" href="#" aria-label="Next" onClick={() => paginate(++currentPage)}>
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
             </ul>
         </nav>
     )
