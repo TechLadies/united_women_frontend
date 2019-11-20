@@ -1,18 +1,36 @@
 .sidebar {
-    min-width: 300px;
-    max-width: 300px;
+    min-width: 280px;
+    max-width: 280px;
     height: 100vh;
     padding: 35px;
+    display: flex;
+    flex-direction: column;
 }
 
 a {
-    color: #009cd7;
+    color: #0098DC;
+    font-weight: bold;
+}
+a:hover {
+    color: #0098DC;
+}
+
+.sidebar-nav ul {
+    list-style-type: none;
+    padding: 0;
 }
 
 .nav-link {
     padding: 1rem 0;
+    text-transform: uppercase;
+    font-weight: normal;
 }
 
-.sidebar .btn-logout {
-    align-self: flex-end;
+.nav-link.active {
+    font-weight: bold;
+}
+
+.btn-logout {
+    margin-top: auto;
+    margin-bottom: 0;
 }
