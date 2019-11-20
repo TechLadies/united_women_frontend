@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import './NavBar.css'
 
-function NavBar() {
+function NavBar({ unsetToken }) {
     const checkActive = (match, location) => {
         const {pathname} = location;
         if (pathname === "/"
@@ -32,7 +32,7 @@ function NavBar() {
                     </li>
                 </ul>
             </nav>
-            <button type="button" className="btn btn-outline-primary btn-block btn-logout">Logout</button>
+            <button type="button" className="btn btn-outline-primary btn-block btn-logout" onClick={ unsetToken }>Logout</button>
         </div>
 
     );

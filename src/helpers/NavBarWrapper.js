@@ -2,12 +2,12 @@ import React from 'react'
 import NavBar from '../components/NavBar'
 
 function NavBarWrapper(Component) {
-    return function() {
+    return function({ unsetToken, ...props }) {
         return (
             <React.Fragment>
-                <NavBar/>
+                <NavBar unsetToken={ unsetToken }/>
                 <main>
-                <Component/>
+                    <Component unsetToken={ unsetToken } { ...props } />
                 </main>
             </React.Fragment>
         )

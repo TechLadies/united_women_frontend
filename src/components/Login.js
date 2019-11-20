@@ -16,7 +16,7 @@ function LoginPage({ setToken }) {
         username: inputs.username,
         password: inputs.password,
       });
-      
+
       if (token) {
         setToken(token);
       }
