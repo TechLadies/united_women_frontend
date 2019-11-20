@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import EditDonorForm from './EditDonorForm'
 import NavBarWrapper from '../helpers/NavBarWrapper'
-
+import { withAuthorisedPageHOC } from '../wrappers/withTokenHOC'
 
 const DonorOverview = () => {
   const currentDonor = {
@@ -122,4 +122,4 @@ const DonorDetails = props => {
 
 
 
-export default NavBarWrapper(DonorOverview)
+export default withAuthorisedPageHOC(NavBarWrapper(DonorOverview))

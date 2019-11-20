@@ -1,5 +1,6 @@
 import React from 'react'
 import NavBarWrapper from '../helpers/NavBarWrapper'
+import { withAuthorisedPageHOC } from '../wrappers/withTokenHOC'
 
 const UploadRecords = () => (
   <main>
@@ -8,4 +9,4 @@ const UploadRecords = () => (
 )
 
 
-export default NavBarWrapper(UploadRecords)
+export default withAuthorisedPageHOC(NavBarWrapper(UploadRecords))
