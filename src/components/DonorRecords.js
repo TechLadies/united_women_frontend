@@ -12,14 +12,14 @@ const DonorRecords = () => {
         <h1 className="col-md-8 font-weight-bold donorHeader">
           Donor Records
         </h1>
-          <Link to='/' className="btn btn-outline-primary col-md-2 addDonorBtn" >Add Donor</Link>
+        <Link to='/' className="btn btn-outline-primary col-md-2 addDonorBtn" >Add Donor</Link>
       </div>
-      <div className="row" style={{marginTop:'35px'}}>
+      <div className="row" style={{ marginTop: '35px' }}>
         <div className="col">
           <DropdownFilter />
         </div>
       </div>
-      
+
     </div>
   );
 }
