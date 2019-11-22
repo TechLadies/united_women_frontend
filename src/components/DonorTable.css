@@ -1,0 +1,40 @@
+/* CSS Variables */
+:root {
+    --c-black: #373A3C;
+    --font: 'IBM Plex Sans', sans-serif;
+    --c-white: #FFFFFF;
+    --shadow: 0px -1px 0px #ECEEEF;
+    --c-lightgray: #F9F9F9;
+    --c-gray-4: #BDBDBD;
+}
+
+.donorTableHeader {
+    color: var(--c-black);
+    font-family: var(--font);
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 24px;
+    background: var(--c-white);
+    box-shadow: var(--shadow);
+}
+
+.donorTableBody {
+    color: var(--c-black);
+    font-family: var(--font);
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    box-shadow: var(--shadow);
+}
+
+.noOfRecords {
+    color: var(--c-gray-4);
+    font-family: var(--font);
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 21px;
+    text-align: right;
+}

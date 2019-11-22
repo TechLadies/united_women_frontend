@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Work+Sans&display=swap');
+
+/* CSS Variables */
+:root {
+    --c-blue: #0397D6;
+    --font-page: 'Work Sans', sans-serif;
+    --c-white: #FFFFFF;
+    --c-gray-6: #F2F2F2;
+}
+
+.pagination {
+    color: var(--c-blue);
+    font-family: var(--font-page);
+    font-size: 12px;
+    line-height: 21px;
+}
+
+.pagination a.active {
+    background: var(--c-blue);
+    color: var(--c-gray-6);
+}
