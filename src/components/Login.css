@@ -1,14 +1,34 @@
-.container {
+/* CSS Variables */
+:root {
+    --c-blue: #0397D6;
+    --font-header: 'Work Sans', sans-serif;
+    --font: 'IBM Plex Sans', sans-serif;
+    --c-white: #FFFFFF;
+    --c-black: #373A3C;
+}
+
+.loginContainer {
     margin-top: 10rem;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.loginHeader {
+    font-family: var(--font-header);
+    color: var(--c-blue);
+    font-size: 36px;
+    line-height: 96.9%;
+    letter-spacing: 0.1em;
 }
 
 .loginForm {
     margin-top: 2.5rem;
 }
 
-h2 {
-    color: #009cd7;
+.loginLabel1 {
+    color: var(--c-black);
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 21px;
 }
 
 .errorMessage {
@@ -16,16 +36,29 @@ h2 {
     margin-top: 0.5rem;
   }
 
-.spacer {
+.loginLabel2 {
+    color: var(--c-black);
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 21px;
     margin-top: 0.5rem;
 }
 
 .loginBtn {
     margin-top: 2rem;
     padding: 0.7rem 0;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
     text-align: center;
-    border-radius: 2.5px;
-    font-size: 0.9rem;
-    color: #ffffff;
-    background: #009cd7;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--c-white);
+    font-family: var(--font);
+    background: var(--c-blue);
+    border: 1px solid #0397D6;
+    box-sizing: border-box;
+    border-radius: 2px;
 }
