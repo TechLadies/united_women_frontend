@@ -2,15 +2,29 @@ import React from 'react';
 import './Login.css';
 import useForm from '../useForm';
 import validate from '../validateLogin';
+import auth from '../helpers/auth';
+import { withLoginPageHOC } from '../wrappers/withTokenHOC';
 
-const LoginPage = () => {
 
-    const { inputs, errors, touched, handleChange, handleBlur, handleSubmit} = useForm(submit, validate);
+function LoginPage({ setToken }) {
 
-    function submit() {
-      console.log('Submitted');
-      console.log(inputs);
+  const { inputs, errors, touched, handleChange, handleBlur, handleSubmit} = useForm(submit, validate);
+
+  async function submit() {
+    try {
+      const token = await auth({
+        username: inputs.username,
+        password: inputs.password,
+      });
+
+      if (token) {
+        setToken(token);
+      }
+
+    } catch (err) {
+      console.error(err);
     }
+  }
 
   return (
     <div className='container'>
@@ -52,4 +66,4 @@ const LoginPage = () => {
   );
 }
 
-export default LoginPage;
+export default withLoginPageHOC(LoginPage);
