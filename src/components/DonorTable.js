@@ -4,7 +4,7 @@ import donorData from './donorData';
 import PageNavigation from './PageNavigation';
 import './DonorTable.css';
 
-const DonorTable = () => {
+const DonorTable = props => {
 
   /*const [data, setData] = useState({donors: [], isFetching: false});
 
@@ -62,8 +62,7 @@ const DonorTable = () => {
               </tr>
             </thead>
             <tbody className="donorTableBody">
-            {
-              donorsOnCurrentPage.map(donor => (
+            {props.data.map(donor => (
                 <tr>
                   <td>{ donor.nric }</td>
                   <td>{ donor.name }</td>

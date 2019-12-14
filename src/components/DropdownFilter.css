@@ -1,0 +1,37 @@
+/* CSS Variables */
+:root {
+    --c-black: #373A3C;
+    --font: 'IBM Plex Sans', sans-serif;
+    --c-lightgray: #F9F9F9;
+}
+
+.dropdownLabel1 {
+    color: var(--c-black);
+    font-family: var(--font);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding-top: 7px;
+}
+
+.dropdownLabel2 {
+    color: var(--c-black);
+    font-family: var(--font);
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+}
+
+.dropdownLabel3 {
+    color: var(--c-black);
+    font-family: var(--font);
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    padding-top: 10px;
+}
