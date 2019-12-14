@@ -19,7 +19,6 @@ const DonorRecords = () => {
           <DropdownFilter />
         </div>
       </div>
-
     </div>
   );
 }
