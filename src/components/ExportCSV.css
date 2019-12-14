@@ -1,0 +1,23 @@
+/* CSS Variables */
+:root {
+    --c-blue: #0397D6;
+    --font: 'IBM Plex Sans', sans-serif;
+    --c-white: #FFFFFF;
+}
+
+.exportBtn {
+    color: var(--c-white);
+    text-transform: uppercase;
+    font-family: var(--font);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: 1px;
+    background: var(--c-blue);
+    border: 1px solid var(--c-blue);
+    box-sizing: border-box;
+    border-radius: 2px;
+    padding: 10px 23px;
+}

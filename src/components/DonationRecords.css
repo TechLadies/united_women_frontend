@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap');
+
+/* CSS Variables */
+:root {
+    --c-blue: #0397D6;
+    --font: 'IBM Plex Sans', sans-serif;
+    --c-white: #FFFFFF;
+}
+
+.donationContainer {
+    height: 100vh;
+    padding: 35px 100px 0 20px;
+    margin: 0;
+}
+
+.donationHeader {
+    color: var(--c-blue);
+    text-transform: uppercase;
+    font-family: var(--font);
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 17px;
+    letter-spacing: 1px;
+    padding-top: 10px;
+}
+
+.addDonorBtn {
+    color: var(--c-blue);
+    text-transform: uppercase;
+    font-family: var(--font);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: 1px;
+    border: 1px solid var(--c-blue);
+    box-sizing: border-box;
+    border-radius: 2px;
+    padding: 10px;
+    text-decoration: none;
+}

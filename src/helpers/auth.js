@@ -8,6 +8,8 @@ export default async function auth({ username, password }) {
     body: JSON.stringify({ username, password }),
   })
 
+  console.log(response);
+
   if (response.status === 200) {
     const data = await response.json();
     return data.token
