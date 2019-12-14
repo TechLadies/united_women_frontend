@@ -5,10 +5,11 @@ import DonorTable from './DonorTable';
 import './DonorRecords.css';
 import NavBarWrapper from '../helpers/NavBarWrapper';
 import ExportCSV from './ExportCSV';
+import donorData from './donorData';
 
 const DonorRecords = () => {
   return (
-    <div className="donorContainer offset-md-3">
+    <div className="donorContainer">
       <div className="row justify-content-md-between">
         <h1 className="col-md-8 font-weight-bold donorHeader">
           Donor Records
@@ -16,20 +17,11 @@ const DonorRecords = () => {
           <Link to='/' className="btn btn-outline-primary col-md-2 addDonorBtn" >Add Donor</Link>
       </div>
       <div className="row" style={{marginTop:'35px'}}>
-      <div className="col">
+        <div className="col">
           <DropdownFilter />
         </div>
       </div>
-      <div className="row justify-content-md-end" style={{marginTop:'20px'}}>
-        <div className="col-md-2.5">
-          <ExportCSV />
-        </div>
-      </div>
-      <div className="row" style={{marginTop:'20px'}}>
-        <div className="col">
-          <DonorTable />
-        </div>
-      </div>
+      
     </div>
   );
 }
