@@ -8,6 +8,11 @@
     flex-direction: column;
 }
 
+/* Only for the wrapper navbar where the next component has an offset from sidebar */
+.sidebar + .sidebar-offset-left {
+    padding-left: 280px;
+}
+
 a {
     color: #0098DC;
     font-weight: bold;

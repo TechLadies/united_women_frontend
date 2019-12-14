@@ -6,9 +6,11 @@ function NavBarWrapper(Component) {
         return (
             <React.Fragment>
                 <NavBar unsetToken={ unsetToken }/>
-                <main>
-                    <Component unsetToken={ unsetToken } { ...props } />
-                </main>
+                <div className="sidebar-offset-left">
+                    <main>
+                        <Component unsetToken={ unsetToken } { ...props } />
+                    </main>
+                </div>
             </React.Fragment>
         )
     }
