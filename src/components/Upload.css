@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap");
+
+:root {
+  --c-blue: #0397d6;
+  --font: "IBM Plex Sans", sans-serif;
+  --c-white: #ffffff;
+}
+.flexbox {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  align-content: space-between;
+  width: 110%;
+}
+
+h1 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 17px;
+  align-items: flex-end;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+hr {
+  width: 110%;
+}
+
+select {
+  background-color: #f9f9f9;
+  width: 291px;
+  height: 45px;
+  border-radius: 2px;
+  margin-top: 40px;
+  margin-right: 20px;
+  padding-left: 10px;
+}
+
+#uploadFileBtn {
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 1px;
+  background-color: var(--c-blue);
+  color: white;
+  width: 100%;
+  height: 45px;
+  margin-top: 13px;
+  border: none;
+}
