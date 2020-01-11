@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import './NavBar.css'
 
 function NavBar({ unsetToken }) {
-    const checkActive = (match, location) => {
+    const checkActive = (_, location) => {
         const {pathname} = location;
         if (pathname === "/"
             || pathname === "/donor-record"
@@ -11,6 +11,7 @@ function NavBar({ unsetToken }) {
             return true;
         }
     }
+
     return (
         <div className='sidebar bg-light'>
             <div className='sidebar-brand'>
@@ -32,7 +33,12 @@ function NavBar({ unsetToken }) {
                     </li>
                 </ul>
             </nav>
-            <button type="button" className="btn btn-outline-primary btn-block btn-logout">Logout</button>
+            <button 
+                type="button" 
+                className="btn btn-outline-primary btn-block btn-logout" 
+                onClick={unsetToken}>
+                Logout
+            </button>
         </div>
 
     );

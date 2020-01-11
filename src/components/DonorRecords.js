@@ -1,11 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import DropdownFilter from './DropdownFilter';
-import DonorTable from './DonorTable';
 import './DonorRecords.css';
 import NavBarWrapper from '../helpers/NavBarWrapper';
-import ExportCSV from './ExportCSV';
-import donorData from './donorData';
+import { withAuthorisedPageHOC } from '../wrappers/withTokenHOC'
 
 const DonorRecords = () => {
   return (
@@ -26,4 +24,4 @@ const DonorRecords = () => {
   );
 }
 
-export default NavBarWrapper(DonorRecords);
+export default withAuthorisedPageHOC(NavBarWrapper(DonorRecords));
