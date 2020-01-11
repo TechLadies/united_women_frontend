@@ -1,9 +1,56 @@
-import React from "react";
-import Button from "react-bootstrap/Button";
+import React, { useRef, useState } from 'react';
+import "./ChooseFile.css";
 
 const ChooseFile = () => {
-  // return <Button as="input" type="file" id="chooseFileBtn" />;
-  return <input type="file" className="btn btn-primary" id="chooseFileBtn" />;
+  const fileInput = useRef(null);
+  const [fileValue, setFileValue] = useState(null);
+  
+  const onFileChange = () => {
+    if (fileInput && fileInput.current.files &&
+      fileInput.current.files[0]) {
+      setFileValue(fileInput.current.files[0]);
+    }
+  }
+
+  const triggerFileInputClick = () => {
+    // Remove file if it is present in page
+    if (fileInput && fileValue) {
+      fileInput.current.value = null;
+      setFileValue(null);
+    } else if (fileInput) {
+      fileInput.current.click();
+    }
+  }  
+
+  const getFileButton = () => {
+    return (
+      <button 
+        onClick={triggerFileInputClick} 
+        className="btn btn-outline-primary">{fileValue ? 'Remove File' : 'Choose File'}</button>
+    )
+  }
+
+  const getFileLabel = () => {
+    return (
+      <span 
+        onClick={triggerFileInputClick} 
+        className="button-choosefile-text">
+        {fileValue ? `File Chosen: ${fileValue.name}` : 'Please choose a file to upload'}
+      </span>
+    )
+  }
+
+  return (
+    <div>
+      { getFileButton() }
+      <input 
+        type="file" 
+        style={{display: 'none'}} 
+        onChange={onFileChange}
+        ref={fileInput} />
+      { getFileLabel() }
+    </div>
+  )
 };
 
 export default ChooseFile;
