@@ -1,11 +1,10 @@
 import React from "react";
 import NavBarWrapper from "../helpers/NavBarWrapper";
 import { withAuthorisedPageHOC } from "../wrappers/withTokenHOC";
-import DropdownSource from "../components/DropdownSource";
-import ChooseFile from "../components/ChooseFile";
-import UploadFile from "../components/UploadFile";
-import ExistingDonors from "../components/ExistingDonors";
-import NewDonors from "./NewDonors";
+import DropdownSource from "./DropdownSource";
+import ChooseFile from "./ChooseFile";
+import UploadFile from "./UploadFile";
+import UploadSummary from "./UploadSummary"
 import "./Upload.css";
 
 const UploadRecords = () => {
@@ -19,8 +18,7 @@ const UploadRecords = () => {
           <UploadFile />
         </div>
         <hr></hr>
-        <ExistingDonors />
-        <NewDonors />
+        <UploadSummary />
       </div>
     </main>
   );

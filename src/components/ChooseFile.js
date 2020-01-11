@@ -24,7 +24,7 @@ const ChooseFile = () => {
 
   const getFileButton = () => {
     return (
-      <button 
+      <button id="chooseFileBtn"
         onClick={triggerFileInputClick} 
         className="btn btn-outline-primary">{fileValue ? 'Remove File' : 'Choose File'}</button>
     )
@@ -32,7 +32,7 @@ const ChooseFile = () => {
 
   const getFileLabel = () => {
     return (
-      <span 
+      <span id="filemsg"
         onClick={triggerFileInputClick} 
         className="button-choosefile-text">
         {fileValue ? `File Chosen: ${fileValue.name}` : 'Please choose a file to upload'}

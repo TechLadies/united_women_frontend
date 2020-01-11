@@ -10,7 +10,7 @@
   align-items: flex-end;
   flex-wrap: wrap;
   align-content: space-between;
-  width: 110%;
+  width: 100%;
 }
 
 h1 {
@@ -24,13 +24,14 @@ h1 {
 }
 
 hr {
-  width: 110%;
+  width: 120%;
 }
 
 select {
   background-color: #f9f9f9;
   width: 291px;
   height: 45px;
+  border: 0px;
   border-radius: 2px;
   margin-top: 40px;
   margin-right: 20px;
@@ -47,4 +48,55 @@ select {
   height: 45px;
   margin-top: 13px;
   border: none;
+}
+
+#upload-header {
+  font-family: IBM Plex Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 17px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #373a3c;
+  margin-top: 76px;
+}
+
+.donor-header {
+  font-family: IBM Plex Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 17px;
+  letter-spacing: 1px;
+  color: #373a3c;
+  text-transform: uppercase;
+}
+
+#chooseFileBtn {
+  height: 45px;
+  color: var(--c-blue);
+  font-family: IBM Plex Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid #0397d6;
+  box-sizing: border-box;
+  border-radius: 2px;
+  width: 140px;
+  margin-right: 20px;
+}
+
+#chooseFileBtn:hover {
+  background-color: var(--c-blue);
+  color: white;
+}
+
+#filemsg {
+  margin-left: 0px;
+  text-overflow: ellipsis;
 }
