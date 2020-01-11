@@ -34,14 +34,14 @@ const ChooseFile = () => {
     return (
       <span id="filemsg"
         onClick={triggerFileInputClick} 
-        className="button-choosefile-text">
+        className="choosefile-button-sidetext">
         {fileValue ? `File Chosen: ${fileValue.name}` : 'Please choose a file to upload'}
       </span>
     )
   }
 
   return (
-    <div>
+    <div className="choosefile-button">
       { getFileButton() }
       <input 
         type="file" 

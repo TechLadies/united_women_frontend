@@ -11,6 +11,8 @@
 /* Only for the wrapper navbar where the next component has an offset from sidebar */
 .sidebar + .sidebar-offset-left {
     padding-left: 280px;
+    width: 100%;
+    max-width: 100%;
 }
 
 a {
