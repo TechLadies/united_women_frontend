@@ -62,8 +62,8 @@ const DonorTable = props => {
               </tr>
             </thead>
             <tbody className="donorTableBody">
-            {props.data.map(donor => (
-                <tr>
+            {props.data.map((donor, index) => (
+                <tr key={`${index}-${donor.nric}`}>
                   <td>{ donor.nric }</td>
                   <td>{ donor.name }</td>
                   <td>{ donor.amt }</td>
