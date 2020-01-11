@@ -44,7 +44,7 @@ const EditDonorForm = ({
                 readOnly={!editing}
                 name="frequency"
                 disabled
-                defaultValue={donor.frequency}
+                value={donor.frequency}
                 onChange={handleInputChange}
                 required
               />
@@ -57,7 +57,7 @@ const EditDonorForm = ({
                 <Form.Control
                   as="select"
                   name="salutation"
-                  defaultValue={donor.salutation}
+                  value={donor.salutation}
                   onChange={handleInputChange}
                   required
                 >
@@ -72,7 +72,7 @@ const EditDonorForm = ({
                   readOnly={!editing}
                   name="salutation"
                   disabled
-                  defaultValue={donor.salutation}
+                  value={donor.salutation}
                   required
                 />
               )}
@@ -83,7 +83,7 @@ const EditDonorForm = ({
                 plaintext={!editing}
                 readOnly={!editing}
                 name="name"
-                defaultValue={donor.name}
+                value={donor.name}
                 onChange={handleInputChange}
                 required
               />
@@ -100,7 +100,7 @@ const EditDonorForm = ({
                 readOnly={!editing}
                 name="email"
                 type="email"
-                defaultValue={donor.email}
+                value={donor.email}
                 onChange={handleInputChange}
                 required
               />
@@ -114,7 +114,7 @@ const EditDonorForm = ({
                 plaintext={!editing}
                 readOnly={!editing}
                 name="contactNo"
-                defaultValue={donor.contactNo}
+                value={donor.contactNo}
                 onChange={handleInputChange}
                 required
               />
@@ -127,7 +127,7 @@ const EditDonorForm = ({
                 plaintext={!editing}
                 readOnly={!editing}
                 name="address"
-                defaultValue={donor.address}
+                value={donor.address}
                 onChange={handleInputChange}
                 required
               />

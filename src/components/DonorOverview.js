@@ -77,7 +77,7 @@ const DonorOverview = props => {
   const CancelButton = () => (
     <button
       onClick={() => {
-        setDonor({});
+        setDonor({ ...initialDonor });
         setEditing(false);
       }}
       className="btn btn-link"
