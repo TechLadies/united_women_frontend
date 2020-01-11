@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import EditDonorForm from "./EditDonorForm";
 import NavBarWrapper from "../helpers/NavBarWrapper";
 import DonationHistory from "./DonationHistory";
-import { withAuthorisedPageHOC } from '../wrappers/withTokenHOC'
+import { withAuthorisedPageHOC } from "../wrappers/withTokenHOC";
 
 const DonorOverview = props => {
   const id = props.match.params.id;
@@ -21,10 +21,13 @@ const DonorOverview = props => {
         name: json.name,
         email: json.email,
         identifier: json.identifier,
+        donorType: json.donorType.donorType,
         frequency: json.donorFrequency.donorFrequency,
         salutation: json.salutation.salutation,
         contactNo: json.contactNo,
-        address: json.address
+        address: json.address,
+        contactMode: json.contactMode.contactMode,
+        dncStatus: json.doNotContact
       };
       setInitialDonor({ ...initial });
       setDonor({ ...initial });
@@ -37,10 +40,13 @@ const DonorOverview = props => {
       name: donor.name,
       email: donor.email,
       identifier: donor.identifier,
+      donorType: donor.donorType,
       frequency: donor.frequency,
       salutation: donor.salutation,
       contactNo: donor.contactNo,
-      address: donor.address
+      address: donor.address,
+      contactMode: donor.contactMode,
+      dncStatus: donor.dncStatus
     });
   };
 
@@ -126,4 +132,4 @@ const DonorOverview = props => {
   );
 };
 
-export default withAuthorisedPageHOC(NavBarWrapper(DonorOverview))
+export default withAuthorisedPageHOC(NavBarWrapper(DonorOverview));
