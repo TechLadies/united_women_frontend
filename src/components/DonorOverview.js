@@ -15,19 +15,19 @@ const DonorOverview = props => {
   useEffect(() => {
     const loadDonorInfo = async () => {
       const json = await fetch(
-        `http://localhost:3001/donors/${id}`
+        `${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors/${id}`
       ).then(response => response.json());
       let initial = {
         name: json.name,
         email: json.email,
         identifier: json.identifier,
-        donorType: json.donorType.donorType,
-        frequency: json.donorFrequency.donorFrequency,
-        salutation: json.salutation.salutation,
+        donorType: json.donorTypeId,
+        frequency: json.donorFrequencyId,
+        salutation: json.salutationId,
         contactNo: json.contactNo,
         address: json.address,
-        contactMode: json.contactMode.contactMode,
-        dncStatus: json.doNotContact
+        contactMode: json.preferredContactMode,
+        doNotContact: json.doNotContact
       };
       setInitialDonor({ ...initial });
       setDonor({ ...initial });
@@ -36,6 +36,24 @@ const DonorOverview = props => {
   }, []);
 
   const updateDonor = () => {
+    fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: donor.name,
+        email: donor.email,
+        identifier: donor.identifier,
+        donorFrequencyId: parseInt(donor.frequency, 10),
+        donorTypeId: parseInt(donor.donorType, 10),
+        salutationId: parseInt(donor.salutation, 10),
+        contactNo: donor.contactNo,
+        address: donor.address,
+        preferredContactMode: parseInt(donor.contactMode, 10),
+        doNotContact: donor.doNotContact
+      })
+    });
     setDonor({
       name: donor.name,
       email: donor.email,
@@ -46,7 +64,7 @@ const DonorOverview = props => {
       contactNo: donor.contactNo,
       address: donor.address,
       contactMode: donor.contactMode,
-      dncStatus: donor.dncStatus
+      doNotContact: donor.doNotContact
     });
   };
 
@@ -66,6 +84,11 @@ const DonorOverview = props => {
   const handleInputChange = event => {
     const { name, value } = event.target;
     setDonor({ ...donor, [name]: value });
+  };
+
+  const handleCheckboxChange = event => {
+    const { name } = event.target;
+    setDonor({ ...donor, [name]: event.target.checked });
   };
 
   const SaveButton = () => (
@@ -123,6 +146,7 @@ const DonorOverview = props => {
           donor={donor}
           editing={editing}
           handleInputChange={handleInputChange}
+          handleCheckboxChange={handleCheckboxChange}
           validated={validated}
           handleSubmit={handleSubmit}
         />
