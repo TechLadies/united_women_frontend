@@ -24,10 +24,10 @@ const App = ({ cookies }) => {
         <Switch>
           <Route path="/login" component={Login}/>
           <Route exact path='/' component={DonorRecords}/>
+          <Route path="/donors/:id/donations" component={DonorOverview} />
           <Route path="/donation-records" component={DonationRecords}/>
           <Route path="/upload-records" component={UploadRecords}/>
           <Route path="/donor-record" component={DonorOverview}/>
-          <Route path="/donors/:id/donations" component={DonorOverview} />
           <Route path="/add-donor" component={AddDonor} />
         </Switch>
       </Router>
