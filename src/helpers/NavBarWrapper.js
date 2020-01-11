@@ -1,5 +1,5 @@
-import React from 'react'
-import NavBar from '../components/NavBar'
+import React from "react";
+import NavBar from "../components/NavBar";
 
 function NavBarWrapper(Component) {
     return function({ unsetToken, ...props }) {
@@ -16,4 +16,4 @@ function NavBarWrapper(Component) {
     }
 }
 
-export default NavBarWrapper
+export default NavBarWrapper;

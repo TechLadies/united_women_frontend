@@ -12,6 +12,7 @@ import UploadRecords from './components/UploadRecords';
 import DonorOverview from './components/DonorOverview';
 import TokenContext, { useTokenState } from './contexts/TokenContext';
 import { withCookies } from 'react-cookie';
+import AddDonor from "./components/AddDonor";
 
 const App = ({ cookies }) => {
   const [token, setToken, unsetToken] = useTokenState(cookies);
@@ -23,13 +24,15 @@ const App = ({ cookies }) => {
         <Switch>
           <Route path="/login" component={Login}/>
           <Route exact path='/' component={DonorRecords}/>
+          <Route path="/donors/:id/donations" component={DonorOverview} />
           <Route path="/donation-records" component={DonationRecords}/>
           <Route path="/upload-records" component={UploadRecords}/>
           <Route path="/donor-record" component={DonorOverview}/>
+          <Route path="/add-donor" component={AddDonor} />
         </Switch>
       </Router>
     </TokenContext.Provider>
   );
-}
+};
 
 export default withCookies(App);

@@ -32,7 +32,7 @@ function NavBar({ unsetToken }) {
                     </li>
                 </ul>
             </nav>
-            <button type="button" className="btn btn-outline-primary btn-block btn-logout" onClick={ unsetToken }>Logout</button>
+            <button type="button" className="btn btn-outline-primary btn-block btn-logout">Logout</button>
         </div>
 
     );
