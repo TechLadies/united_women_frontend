@@ -27,7 +27,8 @@ const DonorOverview = props => {
         contactNo: json.contactNo,
         address: json.address,
         contactMode: json.preferredContactMode,
-        doNotContact: json.doNotContact
+        doNotContact: json.doNotContact,
+        comments: json.comments
       };
       setInitialDonor({ ...initial });
       setDonor({ ...initial });
@@ -51,7 +52,8 @@ const DonorOverview = props => {
         contactNo: donor.contactNo,
         address: donor.address,
         preferredContactMode: parseInt(donor.contactMode, 10),
-        doNotContact: donor.doNotContact
+        doNotContact: donor.doNotContact,
+        comments: donor.comments
       })
     });
     setDonor({
@@ -64,7 +66,8 @@ const DonorOverview = props => {
       contactNo: donor.contactNo,
       address: donor.address,
       contactMode: donor.contactMode,
-      doNotContact: donor.doNotContact
+      doNotContact: donor.doNotContact,
+      comments: donor.comments
     });
   };
 

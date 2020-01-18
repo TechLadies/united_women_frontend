@@ -219,6 +219,20 @@ const EditDonorForm = ({
               />
             </Form.Group>
           </Row>
+          <Row>
+            <Form.Group as={Col} controlId="comments" column sm="12">
+              <Form.Label>Comments</Form.Label>
+              <Form.Control
+                plaintext={!editing}
+                readOnly={!editing}
+                disabled={!editing}
+                value={donor.comments}
+                name="comments"
+                type="textarea"
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+          </Row>
         </Col>
       </Row>
     </Form>
