@@ -9,6 +9,7 @@ const EditDonorForm = ({
   donor,
   editing,
   handleInputChange,
+  handleCheckboxChange,
   validated,
   handleSubmit
 }) => {
@@ -33,31 +34,40 @@ const EditDonorForm = ({
                   onChange={handleInputChange}
                   required
                 >
-                  <option>Individual</option>
-                  <option>Company</option>
+                  <option value="1">Individual</option>
+                  <option value="2">Company</option>
                 </Form.Control>
               ) : (
                 <Form.Control
+                  as="select"
+                  name="donorType"
                   plaintext={!editing}
                   readOnly={!editing}
-                  name="donorType"
                   disabled
                   value={donor.donorType}
+                  onChange={handleInputChange}
                   required
-                />
+                >
+                  <option value="1">Individual</option>
+                  <option value="2">Company</option>
+                </Form.Control>
               )}
             </Form.Group>
             <Form.Group as={Col} controlId="donorFrequency" column sm="6">
               <Form.Label>Frequency</Form.Label>
               <Form.Control
+                as="select"
+                name="donorFrequency"
                 plaintext={!editing}
                 readOnly={!editing}
-                name="frequency"
                 disabled
                 value={donor.frequency}
                 onChange={handleInputChange}
                 required
-              />
+              >
+                <option value="1">Recurring</option>
+                <option value="2">One-Time</option>
+              </Form.Control>
             </Form.Group>
           </Row>
           <Row>
@@ -71,20 +81,29 @@ const EditDonorForm = ({
                   onChange={handleInputChange}
                   required
                 >
-                  <option>Miss</option>
-                  <option>Mr</option>
-                  <option>Mrs</option>
-                  <option>Dr</option>
+                  <option value="1">Mr</option>
+                  <option value="2">Mrs</option>
+                  <option value="3">Ms</option>
+                  <option value="4">Miss</option>
+                  <option value="5">Dr</option>
                 </Form.Control>
               ) : (
                 <Form.Control
                   plaintext={!editing}
                   readOnly={!editing}
-                  name="salutation"
                   disabled
+                  as="select"
+                  name="salutation"
                   value={donor.salutation}
+                  onChange={handleInputChange}
                   required
-                />
+                >
+                  <option value="1">Mr</option>
+                  <option value="2">Mrs</option>
+                  <option value="3">Ms</option>
+                  <option value="4">Miss</option>
+                  <option value="5">Dr</option>
+                </Form.Control>
               )}
             </Form.Group>
             <Form.Group as={Col} controlId="donorName" column sm="6">
@@ -167,31 +186,36 @@ const EditDonorForm = ({
                   onChange={handleInputChange}
                   required
                 >
-                  <option>Email</option>
-                  <option>Phone</option>
+                  <option value="1">Email</option>
+                  <option value="2">Phone</option>
                 </Form.Control>
               ) : (
                 <Form.Control
+                  as="select"
+                  name="contactMode"
+                  value={donor.contactMode}
+                  onChange={handleInputChange}
+                  required
                   plaintext={!editing}
                   readOnly={!editing}
-                  name="contactMode"
                   disabled
-                  value={donor.contactMode}
-                  required
-                />
+                >
+                  <option value="1">Email</option>
+                  <option value="2">Phone</option>
+                </Form.Control>
               )}
             </Form.Group>
           </Row>
           <Row>
-            <Form.Group as={Col} controlId="dncStatus" column sm="12">
+            <Form.Group as={Col} controlId="doNotContact" column sm="12">
               <Form.Check
                 custom
                 label="Do not contact"
                 disabled={!editing}
-                value={donor.dncStatus}
-                name="dncStatus"
+                value={donor.doNotContact}
+                name="doNotContact"
                 type="checkbox"
-                onChange={handleInputChange}
+                onChange={handleCheckboxChange}
               />
             </Form.Group>
           </Row>
