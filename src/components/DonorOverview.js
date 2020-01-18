@@ -69,6 +69,7 @@ const DonorOverview = props => {
       doNotContact: donor.doNotContact,
       comments: donor.comments
     });
+    setInitialDonor({ ...donor });
   };
 
   const handleSubmit = event => {
