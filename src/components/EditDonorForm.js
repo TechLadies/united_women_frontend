@@ -5,6 +5,10 @@ import Col from "react-bootstrap/Col";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./DonorRecords.css";
 
+const removeDropdownAppearance = {
+  "-webkit-appearance": "none",
+  "-moz-appearance": "none"
+};
 const EditDonorForm = ({
   donor,
   editing,
@@ -26,37 +30,26 @@ const EditDonorForm = ({
           <Row>
             <Form.Group as={Col} controlId="donorType" column sm="6">
               <Form.Label>Type</Form.Label>
-              {editing ? (
-                <Form.Control
-                  as="select"
-                  name="donorType"
-                  value={donor.donorType}
-                  onChange={handleInputChange}
-                  required
-                >
-                  <option value="1">Individual</option>
-                  <option value="2">Company</option>
-                </Form.Control>
-              ) : (
-                <Form.Control
-                  as="select"
-                  name="donorType"
-                  plaintext={!editing}
-                  readOnly={!editing}
-                  disabled
-                  value={donor.donorType}
-                  onChange={handleInputChange}
-                  required
-                >
-                  <option value="1">Individual</option>
-                  <option value="2">Company</option>
-                </Form.Control>
-              )}
+              <Form.Control
+                as="select"
+                style={editing ? null : removeDropdownAppearance}
+                name="donorType"
+                plaintext={!editing}
+                readOnly={!editing}
+                disabled={!editing}
+                value={donor.donorType}
+                onChange={handleInputChange}
+                required
+              >
+                <option value="1">Individual</option>
+                <option value="2">Company</option>
+              </Form.Control>
             </Form.Group>
             <Form.Group as={Col} controlId="donorFrequency" column sm="6">
               <Form.Label>Frequency</Form.Label>
               <Form.Control
                 as="select"
+                style={editing ? null : removeDropdownAppearance}
                 name="donorFrequency"
                 plaintext={!editing}
                 readOnly={!editing}
@@ -73,38 +66,23 @@ const EditDonorForm = ({
           <Row>
             <Form.Group as={Col} controlId="donorSalutation" column sm="6">
               <Form.Label>Salutation</Form.Label>
-              {editing ? (
-                <Form.Control
-                  as="select"
-                  name="salutation"
-                  value={donor.salutation}
-                  onChange={handleInputChange}
-                  required
-                >
-                  <option value="1">Mr</option>
-                  <option value="2">Mrs</option>
-                  <option value="3">Ms</option>
-                  <option value="4">Miss</option>
-                  <option value="5">Dr</option>
-                </Form.Control>
-              ) : (
-                <Form.Control
-                  plaintext={!editing}
-                  readOnly={!editing}
-                  disabled
-                  as="select"
-                  name="salutation"
-                  value={donor.salutation}
-                  onChange={handleInputChange}
-                  required
-                >
-                  <option value="1">Mr</option>
-                  <option value="2">Mrs</option>
-                  <option value="3">Ms</option>
-                  <option value="4">Miss</option>
-                  <option value="5">Dr</option>
-                </Form.Control>
-              )}
+              <Form.Control
+                as="select"
+                style={editing ? null : removeDropdownAppearance}
+                plaintext={!editing}
+                readOnly={!editing}
+                disabled={!editing}
+                name="salutation"
+                value={donor.salutation}
+                onChange={handleInputChange}
+                required
+              >
+                <option value="1">Mr</option>
+                <option value="2">Mrs</option>
+                <option value="3">Ms</option>
+                <option value="4">Miss</option>
+                <option value="5">Dr</option>
+              </Form.Control>
             </Form.Group>
             <Form.Group as={Col} controlId="donorName" column sm="6">
               <Form.Label>Name</Form.Label>
@@ -178,32 +156,20 @@ const EditDonorForm = ({
             </Form.Group>
             <Form.Group as={Col} controlId="contactMode" column sm="6">
               <Form.Label>Preferred mode of contact</Form.Label>
-              {editing ? (
-                <Form.Control
-                  as="select"
-                  name="contactMode"
-                  value={donor.contactMode}
-                  onChange={handleInputChange}
-                  required
-                >
-                  <option value="1">Email</option>
-                  <option value="2">Phone</option>
-                </Form.Control>
-              ) : (
-                <Form.Control
-                  as="select"
-                  name="contactMode"
-                  value={donor.contactMode}
-                  onChange={handleInputChange}
-                  required
-                  plaintext={!editing}
-                  readOnly={!editing}
-                  disabled
-                >
-                  <option value="1">Email</option>
-                  <option value="2">Phone</option>
-                </Form.Control>
-              )}
+              <Form.Control
+                as="select"
+                style={editing ? null : removeDropdownAppearance}
+                plaintext={!editing}
+                readOnly={!editing}
+                disabled={!editing}
+                name="contactMode"
+                value={donor.contactMode}
+                onChange={handleInputChange}
+                required
+              >
+                <option value="1">Email</option>
+                <option value="2">Phone</option>
+              </Form.Control>
             </Form.Group>
           </Row>
           <Row>
