@@ -1,187 +1,193 @@
-import React from 'react';
-import './DropdownFilter.css';
-import ReactMultiSelectCheckboxes from 'react-multiselect-checkboxes';
-import donorData from './donorData';
-import ExportCSV from './ExportCSV';
-import DonorTable from './DonorTable';
+import React, { useState, useEffect } from "react";
+import Table from "react-bootstrap/Table";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import "./DropdownFilter.css";
+import Pagination from './Pagination';
+import moment from "moment";
 
 const DropdownFilter = () => {
+  const [donors, setDonors] = useState([]);
+  const [filterValues, setFilterValues] = useState({});
 
-    const [selected, setSelected] = React.useState({ startdate:[], enddate:[], campaign:[], source:[], entity:[] });
+  const [perPage, setPerPage] = useState(10);
+  const [totalItems, setTotalItems] = useState(20);
+  const [currentPage, setCurrentPage] = useState(1);
 
-    const handleStartDateSelect = startdate => {
-        //console.log("startdate:>>> ", startdate)
-        setSelected(selected => ({ ...selected, ['startdate']: startdate }));
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const initialCurrentDate = new Date();
+  const [startDate, setStartDate] = useState(initialCurrentDate.setMonth(initialCurrentDate.getMonth() - 12));
+  const [entityType, setEntityType] = useState('');
+  const [frequency, setFrequency] = useState('');
+
+  /*  var paramsString1 = "http://example.com/search?key1=value1&key2=value2";
+    var searchParams1 = new URLSearchParams(paramsString1);
+    for (var pair of searchParams1.entries()) {
+      //console.log(pair[0] + ", " + pair[1]);
+    }
+  */
+
+  const fetchFilteredDonors = async queryString => {
+    const json = await fetch(
+      `http://localhost:3001/donors${queryString}`
+    ).then(response => response.json());
+    setDonors(json.data);
+    setPerPage(json.perPage);
+  };
+
+  useEffect(() => {
+    const loadDonors = async () => {
+      const json = await fetch(`http://localhost:3001/donors?page=1&perPage=${perPage}`).then(response =>
+        response.json()
+      );
+      setDonors(json.data);
+      setPerPage(json.perPage);
     };
+    loadDonors();
+  }, []);
 
-    const handleEndDateSelect = enddate => {
-        //console.log("enddate:>>> ", enddate)
-        setSelected(selected => ({ ...selected, ['enddate']: enddate }));
-    };
+  const handleFilterChange = (key, value) => {
+    filterValues[key] = value;
+  };
 
-    const handleCampaignSelect = campaign => {
-        //console.log("campaign:>>> ", campaign)
-        setSelected(selected => ({ ...selected, ['campaign']: campaign }));
-    };
+  const handleDateChange = (key, value) => {
+    value.setHours(0, 0, 0, 0);
+    let dateString = value.toISOString();
+    handleFilterChange(key, dateString);
+  }
 
-    const handleSourceSelect = source => {
-        //console.log("source:>>> ", source)
-        setSelected(selected => ({ ...selected, ['source']: source }));
-    };
+  const handleEntityTypeChange = event => {
+    let donorTypeId = event.target.value;
+    setEntityType(donorTypeId);
+    handleFilterChange("donorTypeId", donorTypeId);
+  }
 
-    const handleEntitySelect = entity => {
-        //console.log("entity:>>> ", entity)
-        setSelected(selected => ({ ...selected, ['entity']: entity }));
-    };
+  const handleFrequencyChange = event => {
+    let frequencyId = event.target.value;
+    setFrequency(frequencyId);
+    handleFilterChange("donorFrequencyId", frequencyId);
+  }
 
-    /*const handleSelect = selected => {
-        console.log("selected:>>> ", selected)
-        setSelected({selected})
-    };*/
+  const paginate = pageNumber => {
+    setCurrentPage(pageNumber);
+    handleFilterChange("page", pageNumber);
+    handleFilterChange("perPage", perPage);
+    handleApplyFilters();
+  };
 
-    const getFilteredResults = () => {
-        if(!selected.startdate.length && !selected.enddate.length && !selected.campaign.length && !selected.source.length && !selected.entity.length) {
-            return donorData;
-        }
-        //console.log("getFilteredResults >> ", selected)
-
-        const selectedStartDate = selected.startdate.map(i => {
-            return i.value
-        });
-
-        const selectedEndDate = selected.enddate.map(i => {
-            return i.value
-        });
-
-        const selectedCampaigns = selected.campaign.map(i => {
-            return i.value
-        });
-
-        const selectedSources = selected.source.map(i => {
-            return i.value
-        });
-
-        const selectedEntities = selected.entity.map(i => {
-            return i.value
-        });
-
-        /*console.log("selectedStartDate >>", selectedStartDate);
-        console.log("selectedEndDate >>", selectedEndDate);
-        console.log("selectedCampaign >>", selectedCampaigns);
-        console.log("selectedSources >>", selectedSources);
-        console.log("selectedEntities >>", selectedEntities);*/
-
-        var filteredData = donorData.filter( donor =>
-            selectedStartDate.indexOf(donor.date) >= 0 ||
-            selectedEndDate.indexOf(donor.date) >= 0 ||
-            selectedCampaigns.indexOf(donor.campaign) >= 0 &&
-            selectedSources.indexOf(donor.source) >= 0 ||
-            selectedEntities.indexOf(donor.entity) >= 0
-            /*selectedStartDate.indexOf(donor.date) >= 0 ||
-            selectedEndDate.indexOf(donor.date) >= 0 ||
-            selectedCampaigns.indexOf(donor.campaign) >= 0 ||
-            selectedSources.indexOf(donor.source) >= 0 ||
-            selectedEntities.indexOf(donor.entity) >= 0*/
-        );
-        //console.log("filteredData >> ", filteredData)
-        return filteredData;
-    };
-
-    /*const startDateOptions = [
-        {label: '23 Jan 2010', value: '23 Jan 2010'},
-    ];
-
-    const endDateOptions = [
-        {label: '23 Jan 2019', value: '23 Jan 2019'},
-    ];
-
-    const campaignOptions = [
-        {label: 'STEM', value: 'STEM'},
-        {label: 'Anti-Violence', value: 'Anti-Violence'}
-    ];
-
-    const sourceOptions = [
-        {label: 'Benevity', value: 'Benevity'},
-        {label: 'Giving.sg', value: 'Giving.sg'},
-        {label: 'Paypal', value: 'Paypal'}
-    ];
-
-    const entityOptions = [
-        {label: 'Individuals', value: 'Individuals'},
-        {label: 'Companies', value: 'Companies'}
-    ];*/
-
-    const startDateOptions = [
-        ...new Set(donorData.map(donor => donor.date))
-      ].map(i => {
-        //console.log("i>>", i);
-      return {label: i, value: i}
-      });
-
-    const endDateOptions = [
-        ...new Set(donorData.map(donor => donor.date))
-    ].map(i => {
-        //console.log("i>>", i);
-    return {label: i, value: i}
-    });
-
-    const campaignOptions = [
-        ...new Set(donorData.map(donor => donor.campaign))
-      ].map(i => {
-      return {label: i, value: i}
-      });
-
-    const sourceOptions = [
-        ...new Set(donorData.map(donor => donor.source))
-    ].map(i => {
-    return {label: i, value: i}
-    });
-    
-    const entityOptions = [
-        ...new Set(donorData.map(donor => donor.entity))
-      ].map(i => {
-      return {label: i, value: i}
-      });
+  const handleApplyFilters = () => {
+    //const queryString = "perPage=2";
+    const queryString = Object.keys(filterValues).map(key => key + '=' + filterValues[key]).join('&');
+    fetchFilteredDonors("?" + queryString);
+    window.history.pushState(queryString, "", `/donors?${queryString}`);
+  }
 
 
-    return (
-        <div>
-            <div className="row" >
-                <div className="col-md-2.5 dropdownLabel1" /*style={{marginRight:'15px'}}*/>
-                Filter By:
-                </div>
-                <div className="col dropdownLabel2" /*style={{marginLeft:'25px'}}*/>
-                    <ReactMultiSelectCheckboxes name='startdate' value={selected.startdate} onChange={handleStartDateSelect} options={startDateOptions} placeholderButtonLabel='23 Jan 2010' />
-                </div>
-                <div className="col dropdownLabel3">
-                to
-                </div>
-                <div className="col dropdownLabel2" /*style={{marginLeft:'15px'}}*/>
-                    <ReactMultiSelectCheckboxes name='enddate' value={selected.enddate} onChange={handleEndDateSelect} options={endDateOptions} placeholderButtonLabel='23 Jan 2019' />
-                </div>
-                <div className="col dropdownLabel2" /*style={{marginLeft:'30px'}}*/>
-                    <ReactMultiSelectCheckboxes name='campaign' value={selected.campaign} onChange={handleCampaignSelect} options={campaignOptions} placeholderButtonLabel='All Campaigns' />
-                </div>
-                <div className="col dropdownLabel2" /*style={{marginLeft:'30px'}}*/>
-                    <ReactMultiSelectCheckboxes name='source' value={selected.source} onChange={handleSourceSelect} options={sourceOptions} placeholderButtonLabel='All Sources' />
-                </div>
-                <div className="col dropdownLabel2" /*style={{marginLeft:'30px'}}*/>
-                    <ReactMultiSelectCheckboxes name='entity' value={selected.entity} onChange={handleEntitySelect} options={entityOptions} placeholderButtonLabel='All Entities' />
-                </div>
-            </div>
-            <div className="row justify-content-md-end" style={{marginTop:'20px'}}>
-                <div className="col-md-2.5">
-                    <ExportCSV /*data={donorData} fileName='export'*/ />
-                </div>
-            </div>
-            <div className="row" style={{marginTop:'20px'}}>
-                <div className="col">
-                    <DonorTable data={getFilteredResults()} />
-                </div>
-            </div>
+  const exportCSV = () => {
+    console.log(donors);
+  }
+
+  return (
+    <React.Fragment>
+      <div className="form-inline mb-3">
+        <div className="form-group ">
+          <label for="from-date">Filter by:</label>
+          <DatePicker
+            id="from-date"
+            selected={startDate}
+            maxDate={new Date()}
+            onSelect={date => handleDateChange('dateStart', date)}
+            onChange={date => setStartDate(date)}
+            peekNextMonth
+            showMonthDropdown
+            showYearDropdown
+            dropdownMode="select"
+          />
         </div>
-    )
+        <div className="form-group">
+          <label for="until-date">to</label>
+          <DatePicker
+            id="until-date"
+            selected={currentDate}
+            maxDate={new Date()}
+            onSelect={date => handleDateChange('dateEnd', date)}
+            onChange={date => setCurrentDate(date)}
+            peekNextMonth
+            showMonthDropdown
+            showYearDropdown
+            dropdownMode="select"
+          />
+        </div>
+        <div className="form-group">
+          <select name="donor-type"
+            value={entityType}
+            onChange={handleEntityTypeChange}
+            className="form-control m-2">
+            <option value="">All Entities</option>
+            <option value="1">Company</option>
+            <option value="2">Individual</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <select name="donor-type"
+            value={frequency}
+            onChange={handleFrequencyChange}
+            className="form-control m-2">
+            <option value="">All Frequency</option>
+            <option value="1">Recurring</option>
+            <option value="2">One-time</option>
+          </select>
+        </div>
+        <button
+          type="submit"
+          className="btn btn-primary m-2"
+          onClick={handleApplyFilters}
+        >
+          Apply Filters
+        </button>
+        <button
+          className="btn btn-outline-primary m-2"
+          onClick={exportCSV}
+        >
+          Export
+        </button>
+      </div>
+      <Table striped hover responsive>
+        <thead>
+          <tr>
+            <th>NRIC/UEN</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Type</th>
+            <th>Frequency</th>
+            <th>Total Donated</th>
+            <th>Donation Start</th>
+          </tr>
+        </thead>
+        <tbody>
+          {donors.map((donor, index) => (
+            <tr key={index}>
+              <td><a href={`/donors/${donor.id}/donations`} className="row-link">{donor.identifier}</a></td>
+              <td><a href={`/donors/${donor.id}/donations`} className="row-link">{donor.name}</a></td>
+              <td><a href={`/donors/${donor.id}/donations`} className="row-link">{donor.email}</a></td>
+              <td><a href={`/donors/${donor.id}/donations`} className="row-link">{donor.donorTypeId == 1 ? "company" : "individual"}</a></td>
+              <td><a href={`/donors/${donor.id}/donations`} className="row-link">{donor.donorFrequencyId == 1 ? "recurring" : "one-time"}</a></td>
+              <td><a href={`/donors/${donor.id}/donations`} className="row-link">${donor.total_amount.slice(0, -2)}</a></td>
+              <td><a href={`/donors/${donor.id}/donations`} className="row-link">{moment(donor.donationStart).format("Do MMMM YYYY")}</a></td>
+
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+      <Pagination
+        perPage={perPage}
+        totalItems={totalItems}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
+
+    </React.Fragment>
+  );
 };
 
 export default DropdownFilter;
-

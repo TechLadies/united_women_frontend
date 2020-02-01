@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import moment from "moment";
+import Pagination from './Pagination';
 
 const DonationHistory = props => {
   let perPage = 1;
@@ -50,20 +51,20 @@ const DonationHistory = props => {
       {loading ? (
         <p>Loading</p>
       ) : (
-        <>
-          <DonationHistoryTable
-            donations={data}
-            loading={loading}
-            totalItems={totalItems}
-          />
-          <Pagination
-            perPage={perPage}
-            totalItems={totalItems}
-            paginate={paginate}
-            currentPage={currentPage}
-          />
-        </>
-      )}
+          <>
+            <DonationHistoryTable
+              donations={data}
+              loading={loading}
+              totalItems={totalItems}
+            />
+            <Pagination
+              perPage={perPage}
+              totalItems={totalItems}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
+          </>
+        )}
     </div>
   );
 };
@@ -100,57 +101,6 @@ const DonationHistoryTable = ({ donations, loading, totalItems }) => {
         Showing {donations.length} out of {totalItems} items
       </small>
     </>
-  );
-};
-
-const Pagination = ({ perPage, totalItems, paginate, currentPage }) => {
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(totalItems / perPage); i++) {
-    pageNumbers.push(i);
-  }
-  return (
-    <nav>
-      <ul className="pagination">
-        <li className={currentPage === 1 ? "page-item disabled" : "page-item"}>
-          <button
-            class="page-link"
-            aria-label="Previous"
-            onClick={() => paginate(--currentPage)}
-          >
-            <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">Previous</span>
-          </button>
-        </li>
-        {pageNumbers.map(number => (
-          <li
-            key={number}
-            className={
-              currentPage === number ? "page-item active" : "page-item"
-            }
-          >
-            <button onClick={() => paginate(number)} className="page-link">
-              {number}
-            </button>
-          </li>
-        ))}
-        <li
-          className={
-            currentPage === pageNumbers.length
-              ? "page-item disabled"
-              : "page-item"
-          }
-        >
-          <button
-            class="page-link"
-            aria-label="Next"
-            onClick={() => paginate(++currentPage)}
-          >
-            <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Next</span>
-          </button>
-        </li>
-      </ul>
-    </nav>
   );
 };
 
