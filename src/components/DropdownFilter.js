@@ -45,7 +45,7 @@ const DropdownFilter = () => {
         setFrequency(value);
       }
     }
-    }
+  }
 
   const fetchFilteredDonors = async queryString => {
     const json = await fetch(
@@ -62,8 +62,8 @@ const DropdownFilter = () => {
       let params = getURLParams();
       const json = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors?page=1&perPage=${perPage}&${params}`)
         .then(response =>
-        response.json()
-      );
+          response.json()
+        );
       const total = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors/count?${params}`).then(response => response.json());
       setDonors(json.data);
       setPerPage(json.perPage);
