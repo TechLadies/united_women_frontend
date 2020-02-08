@@ -51,8 +51,10 @@ const DropdownFilter = () => {
     const json = await fetch(
       `${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors${queryString}`
     ).then(response => response.json());
+    const total = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors/count${queryString}`).then(response => response.json());
     setDonors(json.data);
     setPerPage(json.perPage);
+    setTotalItems(total.count);
   };
 
   useEffect(() => {
@@ -62,8 +64,10 @@ const DropdownFilter = () => {
         .then(response =>
         response.json()
       );
+      const total = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors/count?${params}`).then(response => response.json());
       setDonors(json.data);
       setPerPage(json.perPage);
+      setTotalItems(total.count);
     };
     loadDonors();
     setInitialURLParams();
@@ -224,6 +228,9 @@ const DropdownFilter = () => {
           ))}
         </tbody>
       </Table>
+      <small className="float-right text-muted">
+        Showing {donors.length} out of {totalItems} items
+      </small>
       <Pagination
         perPage={perPage}
         totalItems={totalItems}
