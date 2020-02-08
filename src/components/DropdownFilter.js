@@ -11,7 +11,7 @@ const DropdownFilter = () => {
   const [filterValues, setFilterValues] = useState({});
 
   const [perPage, setPerPage] = useState(10);
-  const [totalItems, setTotalItems] = useState(20);
+  const [totalItems, setTotalItems] = useState(50);
   const [currentPage, setCurrentPage] = useState(1);
 
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -19,6 +19,7 @@ const DropdownFilter = () => {
   const [startDate, setStartDate] = useState(initialCurrentDate.setMonth(initialCurrentDate.getMonth() - 12));
   const [entityType, setEntityType] = useState('');
   const [frequency, setFrequency] = useState('');
+  const [nameFilter, setNameFilter] = useState('');
 
   /*  var paramsString1 = "http://example.com/search?key1=value1&key2=value2";
     var searchParams1 = new URLSearchParams(paramsString1);
@@ -68,6 +69,12 @@ const DropdownFilter = () => {
     handleFilterChange("donorFrequencyId", frequencyId);
   }
 
+  const handleNameChange = event => {
+    let name = event.target.value;
+    setNameFilter(name);
+    handleFilterChange("name", name);
+  }
+
   const paginate = pageNumber => {
     setCurrentPage(pageNumber);
     handleFilterChange("page", pageNumber);
@@ -84,7 +91,21 @@ const DropdownFilter = () => {
 
 
   const exportCSV = () => {
-    console.log(donors);
+    let url = window.location.href;
+    let params = url.split('?');
+    let date = new Date();
+    let dateString = date.toDateString();
+    let timeString = date.toLocaleTimeString();
+
+    fetch(`http://localhost:3001/donors/download?${params}`).then(response => {
+      response.blob().then(blob => {
+        let url = window.URL.createObjectURL(blob);
+        let a = document.createElement('a');
+        a.href = url;
+        a.download = `donors-${dateString + '-' + timeString}.csv`;
+        a.click();
+      });
+    });
   }
 
   return (
@@ -124,8 +145,8 @@ const DropdownFilter = () => {
             onChange={handleEntityTypeChange}
             className="form-control m-2">
             <option value="">All Entities</option>
-            <option value="1">Company</option>
-            <option value="2">Individual</option>
+            <option value="1">Individual</option>
+            <option value="2">Company</option>
           </select>
         </div>
         <div className="form-group">
@@ -138,6 +159,14 @@ const DropdownFilter = () => {
             <option value="2">One-time</option>
           </select>
         </div>
+        <div className="form-group">
+          <input type="text"
+            name="name"
+            placeholder="Search by name"
+            className="form-control  m-2"
+            value={nameFilter}
+            onChange={handleNameChange} />
+        </div>
         <button
           type="submit"
           className="btn btn-primary m-2"
@@ -145,12 +174,7 @@ const DropdownFilter = () => {
         >
           Apply Filters
         </button>
-        <button
-          className="btn btn-outline-primary m-2"
-          onClick={exportCSV}
-        >
-          Export
-        </button>
+        <button onClick={exportCSV} className="btn btn-outline-primary m-2">Download</button>
       </div>
       <Table striped hover responsive>
         <thead>
@@ -170,7 +194,7 @@ const DropdownFilter = () => {
               <td><a href={`/donors/${donor.id}/donations`} className="row-link">{donor.identifier}</a></td>
               <td><a href={`/donors/${donor.id}/donations`} className="row-link">{donor.name}</a></td>
               <td><a href={`/donors/${donor.id}/donations`} className="row-link">{donor.email}</a></td>
-              <td><a href={`/donors/${donor.id}/donations`} className="row-link">{donor.donorTypeId == 1 ? "company" : "individual"}</a></td>
+              <td><a href={`/donors/${donor.id}/donations`} className="row-link">{donor.donorTypeId == 1 ? "individual" : "company"}</a></td>
               <td><a href={`/donors/${donor.id}/donations`} className="row-link">{donor.donorFrequencyId == 1 ? "recurring" : "one-time"}</a></td>
               <td><a href={`/donors/${donor.id}/donations`} className="row-link">${donor.total_amount.slice(0, -2)}</a></td>
               <td><a href={`/donors/${donor.id}/donations`} className="row-link">{moment(donor.donationStart).format("Do MMMM YYYY")}</a></td>
