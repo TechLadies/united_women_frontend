@@ -30,7 +30,7 @@ const DropdownFilter = () => {
 
   const fetchFilteredDonors = async queryString => {
     const json = await fetch(
-      `http://localhost:3001/donors${queryString}`
+      `${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors${queryString}`
     ).then(response => response.json());
     setDonors(json.data);
     setPerPage(json.perPage);
@@ -38,7 +38,7 @@ const DropdownFilter = () => {
 
   useEffect(() => {
     const loadDonors = async () => {
-      const json = await fetch(`http://localhost:3001/donors?page=1&perPage=${perPage}`).then(response =>
+      const json = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors?page=1&perPage=${perPage}`).then(response =>
         response.json()
       );
       setDonors(json.data);
@@ -97,7 +97,7 @@ const DropdownFilter = () => {
     let dateString = date.toDateString();
     let timeString = date.toLocaleTimeString();
 
-    fetch(`http://localhost:3001/donors/download?${params}`).then(response => {
+    fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors/download?${params}`).then(response => {
       response.blob().then(blob => {
         let url = window.URL.createObjectURL(blob);
         let a = document.createElement('a');
@@ -107,6 +107,7 @@ const DropdownFilter = () => {
       });
     });
   }
+
 
   return (
     <React.Fragment>
