@@ -21,12 +21,31 @@ const DropdownFilter = () => {
   const [frequency, setFrequency] = useState('');
   const [nameFilter, setNameFilter] = useState('');
 
-  /*  var paramsString1 = "http://example.com/search?key1=value1&key2=value2";
-    var searchParams1 = new URLSearchParams(paramsString1);
-    for (var pair of searchParams1.entries()) {
-      //console.log(pair[0] + ", " + pair[1]);
+  const getURLParams = () => {
+    let url = window.location.href;
+    let splitURLArray = url.split('?');
+    let params = splitURLArray[1];
+    return params;
+  }
+
+  const setInitialURLParams = () => {
+    let params = getURLParams();
+    let searchParams = new URLSearchParams(params);
+    for (var pair of searchParams.entries()) {
+      var key = pair[0];
+      var value = pair[1];
+      filterValues[key] = value;
+      if (key == "dateStart") {
+        setStartDate(value);
+      } else if (key == "dateEnd") {
+        setCurrentDate(value);
+      } else if (key == "donorTypeId") {
+        setEntityType(value);
+      } else if (key == "donorFrequencyId") {
+        setFrequency(value);
+      }
     }
-  */
+    }
 
   const fetchFilteredDonors = async queryString => {
     const json = await fetch(
@@ -38,13 +57,16 @@ const DropdownFilter = () => {
 
   useEffect(() => {
     const loadDonors = async () => {
-      const json = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors?page=1&perPage=${perPage}`).then(response =>
+      let params = getURLParams();
+      const json = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors?page=1&perPage=${perPage}&${params}`)
+        .then(response =>
         response.json()
       );
       setDonors(json.data);
       setPerPage(json.perPage);
     };
     loadDonors();
+    setInitialURLParams();
   }, []);
 
   const handleFilterChange = (key, value) => {
@@ -86,13 +108,11 @@ const DropdownFilter = () => {
     //const queryString = "perPage=2";
     const queryString = Object.keys(filterValues).map(key => key + '=' + filterValues[key]).join('&');
     fetchFilteredDonors("?" + queryString);
-    window.history.pushState(queryString, "", `/donors?${queryString}`);
+    window.history.pushState(queryString, "", `?${queryString}`);
   }
 
-
   const exportCSV = () => {
-    let url = window.location.href;
-    let params = url.split('?');
+    let params = getURLParams();
     let date = new Date();
     let dateString = date.toDateString();
     let timeString = date.toLocaleTimeString();
