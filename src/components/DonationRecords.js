@@ -25,7 +25,7 @@ const DonationRecords = () => {
 
   const fetchFilteredDonations = async queryString => {
     const json = await fetch(
-      `http://localhost:3001/donations${queryString}`
+      `${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donations${queryString}`
     ).then(response => response.json());
     setDonations(json.data);
     setPerPage(json.perPage);
@@ -33,7 +33,7 @@ const DonationRecords = () => {
 
   useEffect(() => {
     const loadDonations = async () => {
-      const json = await fetch(`http://localhost:3001/donations?page=1&perPage=${perPage}`).then(response =>
+      const json = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donations?page=1&perPage=${perPage}`).then(response =>
         response.json()
       );
       setDonations(json.data);
