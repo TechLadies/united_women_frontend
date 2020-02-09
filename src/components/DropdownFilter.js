@@ -9,6 +9,8 @@ import moment from "moment";
 const DropdownFilter = () => {
   const [donors, setDonors] = useState([]);
   const [filterValues, setFilterValues] = useState({});
+  const [donorTypeFilters, setDonorTypeFilters] = useState([]);
+  const [donorFrequencyFilters, setDonorFrequencyFilters] = useState([]);
 
   const [perPage, setPerPage] = useState(10);
   const [totalItems, setTotalItems] = useState(50);
@@ -68,6 +70,9 @@ const DropdownFilter = () => {
       setDonors(json.data);
       setPerPage(json.perPage);
       setTotalItems(total.count);
+      const filtersData = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/filters`).then(response => response.json());
+      setDonorTypeFilters(filtersData.data.donorTypes);
+      setDonorFrequencyFilters(filtersData.data.donorFrequency);
     };
     loadDonors();
     setInitialURLParams();
@@ -170,8 +175,9 @@ const DropdownFilter = () => {
             onChange={handleEntityTypeChange}
             className="form-control m-2">
             <option value="">All Entities</option>
-            <option value="1">Individual</option>
-            <option value="2">Company</option>
+            {donorTypeFilters.map((filter, index) => (
+              <option value={filter.id}>{filter.donorType}</option>
+            ))}
           </select>
         </div>
         <div className="form-group">
@@ -180,8 +186,9 @@ const DropdownFilter = () => {
             onChange={handleFrequencyChange}
             className="form-control m-2">
             <option value="">All Frequency</option>
-            <option value="1">Recurring</option>
-            <option value="2">One-time</option>
+            {donorFrequencyFilters.map((filter, index) => (
+              <option value={filter.id}>{filter.donorFrequency}</option>
+            ))}
           </select>
         </div>
         <div className="form-group">
