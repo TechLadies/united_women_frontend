@@ -44,6 +44,7 @@ function ExportCSV() {
       phone: row.phone,
       website: row.website
     }));
+
     const csvData = objectToCsv(data);
     download(csvData);
   }
