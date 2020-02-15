@@ -206,7 +206,12 @@ const DropdownFilter = () => {
         >
           Apply Filters
         </button>
-        <button onClick={exportCSV} className="btn btn-outline-primary m-2">Download</button>
+        <button
+          className="btn btn-outline-primary m-2"
+          onClick={exportCSV}
+        >
+          Export
+        </button>
       </div>
       <Table striped hover responsive>
         <thead>
