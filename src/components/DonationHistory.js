@@ -4,7 +4,7 @@ import moment from "moment";
 import Pagination from './Pagination';
 
 const DonationHistory = props => {
-  let perPage = 1;
+  let perPage = 10;
   const [totalItems, setTotalItems] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState([]);
@@ -19,10 +19,9 @@ const DonationHistory = props => {
   const loadNewPage = async pageNumber => {
     setLoading(true);
     const response = await fetchJson(
-      `http://localhost:3001/donors/${props.userId}/donations?page=${pageNumber}&perPage=${perPage}`
+      `${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors/${props.userId}/donations?page=${pageNumber}&perPage=${perPage}`
       /*sample: /donors/1/donations?page=3&perPage=12*/
     );
-    setTotalItems(2);
     setData(response.data);
     setLoading(false);
   };
@@ -31,10 +30,13 @@ const DonationHistory = props => {
     const fetchPosts = async () => {
       setLoading(true);
       const response = await fetchJson(
-        `http://localhost:3001/donors/${props.userId}/donations?page=1&perPage=${perPage}`
+        `${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors/${props.userId}/donations?page=1&perPage=${perPage}`
       );
       /* data: Array, page: 1, per_page: 6, total: 12, total_pages: 2*/
-      setTotalItems(2);
+      const totalItemsCount = await fetchJson(
+        `${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors/${props.userId}/donations/count`
+      );
+      setTotalItems(totalItemsCount.data);
       setData(response.data);
       setLoading(false);
     };
