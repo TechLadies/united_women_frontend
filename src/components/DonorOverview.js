@@ -6,6 +6,7 @@ import DonationHistory from "./DonationHistory";
 import { withAuthorisedPageHOC } from "../wrappers/withTokenHOC";
 
 const DonorOverview = props => {
+  const { token } = props;
   const id = props.match.params.id;
   const [donor, setDonor] = useState({});
   const [editing, setEditing] = useState(false);
@@ -14,9 +15,12 @@ const DonorOverview = props => {
 
   useEffect(() => {
     const loadDonorInfo = async () => {
-      const json = await fetch(
-        `${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors/${id}`
-      ).then(response => response.json());
+      const json = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors/${id}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then(response => response.json());
       let initial = {
         name: json.name,
         email: json.email,
@@ -39,7 +43,8 @@ const DonorOverview = props => {
     fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors/${id}`, {
       method: "PATCH",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         name: donor.name,

@@ -32,7 +32,7 @@ function withAuthorisedPageHOCF(Component) {
     }
 
     return (
-      <Component history={ history } {...props} unsetToken={unsetToken} />
+      <Component history={ history } {...props} token={ token } unsetToken={unsetToken} />
     );
   };
 }

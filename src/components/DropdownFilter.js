@@ -5,8 +5,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./DropdownFilter.css";
 import Pagination from './Pagination';
 import moment from "moment";
+import { withAuthorisedPageHOC } from "../wrappers/withTokenHOC";
 
-const DropdownFilter = () => {
+const DropdownFilter = props => {
+  const { token } = props;
   const [donors, setDonors] = useState([]);
   const [filterValues, setFilterValues] = useState({});
   const [donorTypeFilters, setDonorTypeFilters] = useState([]);
@@ -50,10 +52,20 @@ const DropdownFilter = () => {
   }
 
   const fetchFilteredDonors = async queryString => {
-    const json = await fetch(
-      `${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors${queryString}`
-    ).then(response => response.json());
-    const total = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors/count${queryString}`).then(response => response.json());
+    const json = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors${queryString}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(response => response.json());
+
+    const total = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors/count${queryString}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(response => response.json());
+    
     setDonors(json.data);
     setPerPage(json.perPage);
     setTotalItems(total.count);
@@ -62,15 +74,31 @@ const DropdownFilter = () => {
   useEffect(() => {
     const loadDonors = async () => {
       let params = getURLParams();
-      const json = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors?page=1&perPage=${perPage}&${params}`)
-        .then(response =>
-          response.json()
-        );
-      const total = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors/count?${params}`).then(response => response.json());
+      const json = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors?page=1&perPage=${perPage}&${params}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then(response => response.json());
+
+      const total = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors/count?${params}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then(response => response.json());
+
       setDonors(json.data);
       setPerPage(json.perPage);
       setTotalItems(total.count);
-      const filtersData = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/filters`).then(response => response.json());
+
+      const filtersData = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/filters`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then(response => response.json());
+
       setDonorTypeFilters(filtersData.data.donorTypes);
       setDonorFrequencyFilters(filtersData.data.donorFrequency);
     };
@@ -126,7 +154,12 @@ const DropdownFilter = () => {
     let dateString = date.toDateString();
     let timeString = date.toLocaleTimeString();
 
-    fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors/download?${params}`).then(response => {
+    fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donors/download?${params}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(response => {
       response.blob().then(blob => {
         let url = window.URL.createObjectURL(blob);
         let a = document.createElement('a');
@@ -254,4 +287,4 @@ const DropdownFilter = () => {
   );
 };
 
-export default DropdownFilter;
+export default withAuthorisedPageHOC(DropdownFilter);

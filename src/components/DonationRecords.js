@@ -7,7 +7,8 @@ import Pagination from './Pagination';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const DonationRecords = () => {
+const DonationRecords = props => {
+  const { token } = props;
 
   const [donations, setDonations] = useState([]);
   const [filterValues, setFilterValues] = useState({});
@@ -24,16 +25,24 @@ const DonationRecords = () => {
   const [entityType, setEntityType] = useState('');
 
   const fetchFilteredDonations = async queryString => {
-    const json = await fetch(
-      `${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donations${queryString}`
-    ).then(response => response.json());
+    const json = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donations${queryString}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(response => response.json());
     setDonations(json.data);
     setPerPage(json.perPage);
   };
 
   useEffect(() => {
     const loadDonations = async () => {
-      const json = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donations?page=1&perPage=${perPage}`).then(response =>
+      const json = await fetch(`${process.env.REACT_APP_BACKEND_API_HOSTNAME}/donations?page=1&perPage=${perPage}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then(response =>
         response.json()
       );
       setDonations(json.data);

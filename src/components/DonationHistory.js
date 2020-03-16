@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import moment from "moment";
 import Pagination from './Pagination';
+import { withAuthorisedPageHOC } from "../wrappers/withTokenHOC";
 
 const DonationHistory = props => {
+  const { token } = props;
+
   let perPage = 10;
   const [totalItems, setTotalItems] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -12,7 +15,12 @@ const DonationHistory = props => {
   const [loading, setLoading] = useState(false);
 
   const fetchJson = async url => {
-    const json = await fetch(url).then(response => response.json());
+    const json = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(response => response.json());
     return json;
   };
 
@@ -106,4 +114,4 @@ const DonationHistoryTable = ({ donations, loading, totalItems }) => {
   );
 };
 
-export default DonationHistory;
+export default withAuthorisedPageHOC(DonationHistory);
