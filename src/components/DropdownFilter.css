@@ -1,0 +1,60 @@
+/* CSS Variables */
+:root {
+    --c-black: #373A3C;
+    --font: 'IBM Plex Sans', sans-serif;
+    --c-lightgray: #F9F9F9;
+}
+
+.dropdownLabel1 {
+    color: var(--c-black);
+    font-family: var(--font);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding-top: 7px;
+}
+
+.dropdownLabel2 {
+    color: var(--c-black);
+    font-family: var(--font);
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+}
+
+.dropdownLabel3 {
+    color: var(--c-black);
+    font-family: var(--font);
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    padding-top: 10px;
+}
+
+.row-link {
+    display: block;
+    color: var(--c-black);
+    font-weight: normal;
+}
+.row-link:hover, .row-link:focus {
+    text-decoration: none;
+    color: var(--c-black);
+}
+
+.form-inline label {
+    font-weight: bold;
+}
+
+#until-date, #from-date {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    color:#495057;
+    margin: 0.5rem;
+    max-width: 120px;
+}

@@ -1,18 +1,26 @@
 import React from 'react'
-import './DonorRecords.css'
-import NavBarWrapper from '../helpers/NavBarWrapper'
+import { Link } from 'react-router-dom';
+import DropdownFilter from './DropdownFilter';
+import './DonorRecords.css';
+import NavBarWrapper from '../helpers/NavBarWrapper';
 import { withAuthorisedPageHOC } from '../wrappers/withTokenHOC'
-import { Link } from 'react-router-dom'
 
 const DonorRecords = () => {
-  return(
-    <>
-      <h1>Donor Records</h1>
-      {/* for testing */}
-      <Link to='/donor-record' className='nav-link'>Amy Lim</Link>
-      <Link to='/add-donor' className='nav-link'>Add donor</Link>
-    </>
-  )
+  return (
+    <div className="donorContainer">
+      <div className="row justify-content-md-between">
+        <h1 className="col-md-8 font-weight-bold donorHeader">
+          Donor Records
+        </h1>
+        <Link to='/' className="btn btn-outline-primary col-md-2 addDonorBtn" >Add Donor</Link>
+      </div>
+      <div className="row" style={{ marginTop: '35px' }}>
+        <div className="col">
+          <DropdownFilter />
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default withAuthorisedPageHOC(NavBarWrapper(DonorRecords))
+export default withAuthorisedPageHOC(NavBarWrapper(DonorRecords));

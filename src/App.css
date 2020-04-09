@@ -38,7 +38,8 @@
 
 main {
   padding: 30px;
-  flex-grow: 1;
+  height: 100vh;
+  overflow: scroll;
 }
 
 .app-container {
