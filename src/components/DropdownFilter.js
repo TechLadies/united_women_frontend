@@ -65,7 +65,7 @@ const DropdownFilter = props => {
         Authorization: `Bearer ${token}`,
       },
     }).then(response => response.json());
-    
+
     setDonors(json.data);
     setPerPage(json.perPage);
     setTotalItems(total.count);
@@ -266,7 +266,7 @@ const DropdownFilter = props => {
               <td><a href={`/donors/${donor.id}/donations`} className="row-link">{donor.email}</a></td>
               <td><a href={`/donors/${donor.id}/donations`} className="row-link">{donor.donorTypeId == 1 ? "individual" : "company"}</a></td>
               <td><a href={`/donors/${donor.id}/donations`} className="row-link">{donor.donorFrequencyId == 1 ? "recurring" : "one-time"}</a></td>
-              <td><a href={`/donors/${donor.id}/donations`} className="row-link">${donor.total_amount.slice(0, -2)}</a></td>
+              <td><a href={`/donors/${donor.id}/donations`} className="row-link">${donor.total_amount == null ? "0" : donor.total_amount.slice(0, -2)}</a></td>
               <td><a href={`/donors/${donor.id}/donations`} className="row-link">{moment(donor.donationStart).format("Do MMMM YYYY")}</a></td>
 
             </tr>
