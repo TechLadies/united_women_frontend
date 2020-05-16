@@ -51,3 +51,8 @@ h1 {
   font-size: 24px;
   font-weight: bold;
 }
+
+select[disabled] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
