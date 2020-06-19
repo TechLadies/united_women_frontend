@@ -59,7 +59,7 @@ select {
   letter-spacing: 1px;
   text-transform: uppercase;
   color: #373a3c;
-  margin-top: 76px;
+  margin-top: 66px;
 }
 
 .donor-header {
@@ -69,8 +69,21 @@ select {
   font-size: 16px;
   line-height: 17px;
   letter-spacing: 1px;
-  color: #373a3c;
+  color: #0397D6;
   text-transform: uppercase;
+  padding-top: 43px;
+}
+
+.newDonors {
+  padding-left: 0px;
+  padding-right: 0px;
+  height: auto;
+}
+
+.existingDonors {
+  padding-left: 0px;
+  padding-right: 0px;
+  height: auto;
 }
 
 #chooseFileBtn {
@@ -100,3 +113,4 @@ select {
   margin-left: 0px;
   text-overflow: ellipsis;
 }
+
