@@ -11,7 +11,12 @@
 /* Only for the wrapper navbar where the next component has an offset from sidebar */
 .sidebar + .sidebar-offset-left {
     padding-left: 280px;
+<<<<<<< HEAD
     flex-grow: 1;
+=======
+    width: 100%;
+    max-width: 100%;
+>>>>>>> ee00378806039b4773ddf33d27182b41ad71d614
 }
 
 a {

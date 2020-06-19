@@ -1,3 +1,10 @@
-.button-choosefile-text {
+.choosefile-button {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.choosefile-button-sidetext {
     margin-left: 0.5em;
 }

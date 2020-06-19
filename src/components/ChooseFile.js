@@ -34,24 +34,20 @@ const ChooseFile = ({ fileValue, setFileValue }) => {
 
   const getFileLabel = () => {
     return (
-      <span
-        id="filemsg"
-        onClick={triggerFileInputClick}
-        className="button-choosefile-text"
-      >
-        {fileValue
-          ? `File Chosen: ${fileValue.name}`
-          : "Please choose a file to upload"}
+      <span id="filemsg"
+        onClick={triggerFileInputClick} 
+        className="choosefile-button-sidetext">
+        {fileValue ? `File Chosen: ${fileValue.name}` : 'Please choose a file to upload'}
       </span>
     );
   };
 
   return (
-    <div>
-      {getFileButton()}
-      <input
-        type="file"
-        style={{ display: "none" }}
+    <div className="choosefile-button">
+      { getFileButton() }
+      <input 
+        type="file" 
+        style={{display: 'none'}} 
         onChange={onFileChange}
         ref={fileInput}
       />
